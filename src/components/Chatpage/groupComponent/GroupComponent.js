@@ -1,11 +1,11 @@
 import React,{useState} from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import { Collapse, Button, CardBody, Card , Modal, ModalHeader, ModalBody, ModalFooter,Input} from 'reactstrap';
 
 const GroupComponent = (props) => {
-const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [modal, setModal] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-
+  const toggleModal = () => setModal(!modal);
   const DisplayMember = () => {
     return (
       
@@ -16,7 +16,7 @@ const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-        <h5>Group Name ({props.numOfMember})  <Button outline color="success" size="sm" style={{fontSize:'14px'}}>AddMember</Button></h5>
+        <h5>Group Name ({props.numOfMember})  <Button outline color="success" onClick={toggleModal} size="sm" style={{fontSize:'14px'}}>AddMember</Button></h5>
       <Button color="info" onClick={toggle} size="sm"  style={{fontSize:'12px'}}>See Member</Button>
       {/*onClick should set new data for chat fetch in localStorage and in ChatDisplay should re-render in chat display*/}
       <Button color="success" size="sm"  style={{fontSize:'12px'}}>Chat</Button>
@@ -24,6 +24,16 @@ const [isOpen, setIsOpen] = useState(false);
           <DisplayMember/>
         
       </Collapse>
+      <Modal isOpen={modal} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Enter Username</ModalHeader>
+        <ModalBody>
+          <Input />
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={toggleModal}>Add member</Button>
+          <Button color="secondary" onClick={toggleModal}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };

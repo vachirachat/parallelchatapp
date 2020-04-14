@@ -1,0 +1,19 @@
+#displayBubble{
+    display:inline-block;
+    max-width: 60%;
+}
+#displayBubbleRight{
+    display:inline-block;
+    max-width: 60%;
+    float:right;
+}
+#pTimeread{
+    float:right;
+}
+#cardLeft{
+    background-color:'#5bcf38' ;
+}
+#ptext{
+    color:white;
+    margin-bottom: 0;
+}

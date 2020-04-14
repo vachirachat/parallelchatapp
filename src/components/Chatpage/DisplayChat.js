@@ -1,14 +1,15 @@
 import React from 'react';
 import {Card} from 'reactstrap';
 import ChatArea from './chatComponent/ChatArea';
+import './DisplayChat.css';
 const DisplayChat = () => {
     return (
-        <div style={{height:'90vh',display:'block',width:'100%'}}>
-            <Card  style={{height:'90vh',display:'block',overflowY:'scroll',overflowX:'hidden'}}>
+        <div id='divOut'>
+            <Card  id='card'>
                 <div style={{width:'80wh'}}>
                 {/*fetch Data with user */}
                 
-                <ChatArea ownerChat={true} style={{backgroundColor:'#ff0000'}}/>
+                <ChatArea ownerChat={true} />
                 <ChatArea/>
                 <ChatArea ownerChat={true}/>
                 <ChatArea/>

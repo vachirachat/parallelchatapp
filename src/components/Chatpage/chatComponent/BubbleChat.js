@@ -3,24 +3,27 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button,Col,Row
   } from 'reactstrap';
+  import './BubbleChat.css';
 const BubbleChat = (props) => {
     if (props.float == 'left'){
         return (
-            <div style={{display:'inline-block',maxWidth:'60%'}}>
-                <Card>
-                    <h6>chat Message</h6>
+            <div id='displayBubble'>
+                <Card className='bg-success' color='green'>
+                    
+                    <p id='ptext'>chat Message</p>
+                    
                 </Card>
                 <p >name time read</p>
             </div>
         );    
     }
     return (
-        <div style={{display:'inline-block',maxWidth:'60%',float:'right'}}>
-            <Card >
-                <h6>chat Message</h6>
+        <div id='displayBubbleRight'>
+            <Card className="bg-secondary" id='cardRight'>
+                <p id='ptext'>chat Message</p>
             </Card>
             
-            <p style={{float:'right'}}>time read</p>
+            <p id='pTimeread'>time read</p>
             
         </div>
     );

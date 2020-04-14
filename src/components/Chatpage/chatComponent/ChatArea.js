@@ -3,15 +3,17 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button,Row,Col
   } from 'reactstrap';
+import './ChatArea.css';
 import BubbleChat from './BubbleChat';
 const ChatArea = (props) => {
     if (props.ownerChat == true){
         return (
            
-        <div style={{marginRight:'25px'}}>
+        <div id='divBodyRight'>
             <Row>
             
                 <Col>
+                {/*float is prop not css */}
                     <BubbleChat float="right"/>
                     
                 </Col>
@@ -21,7 +23,7 @@ const ChatArea = (props) => {
         );
     }
     return (
-        <div style={{marginLeft:'25px'}}>
+        <div id='divBodyLeft'>
         <Row>
         <h1>Pic</h1>
             <Col>
