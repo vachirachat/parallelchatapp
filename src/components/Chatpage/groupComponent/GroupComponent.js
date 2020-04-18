@@ -9,14 +9,14 @@ const GroupComponent = (props) => {
   const DisplayMember = () => {
     return (
       
-      <p style={{marginLeft:'10px'}}>display member  <Button outline color="danger" size="sm" onClick={toggle} style={{ }}>Delete</Button></p>
+      <p style={{marginLeft:'10px'}}>display member</p>
       
     )
   }
 
   return (
     <div>
-        <h5>Group Name ({props.numOfMember})  <Button outline color="success" onClick={toggleModal} size="sm" style={{fontSize:'14px'}}>AddMember</Button></h5>
+        <h5>Group Name ({props.numOfMember})  <Button outline color="danger" onClick={toggleModal} size="sm" style={{fontSize:'14px'}}>Leave</Button></h5>
       <Button color="info" onClick={toggle} size="sm"  style={{fontSize:'12px'}}>See Member</Button>
       {/*onClick should set new data for chat fetch in localStorage and in ChatDisplay should re-render in chat display*/}
       <Button color="success" size="sm"  style={{fontSize:'12px'}}>Chat</Button>
