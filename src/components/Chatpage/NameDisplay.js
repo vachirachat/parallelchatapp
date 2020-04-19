@@ -8,6 +8,7 @@ import axios from 'axios';
 import { fixControlledValue } from 'antd/lib/input/Input';
 const NameDisplay = () => {
    
+    //groupmember for add member that fetch from server
     const [groupmember,setGroupmember] = useState([])
     const history = useHistory()
     const toggleModal = () => setModal(!modal);
@@ -70,7 +71,7 @@ const NameDisplay = () => {
     }
 
     const fetchGroup = () =>{
-
+        //for fetch data group BKK must add axios here
     }
 
     
@@ -86,7 +87,7 @@ const NameDisplay = () => {
             </div>
             <div id='divGroupComponent'>
 
-
+                {/* area for push data that mapped to here */}
                 
 
             </div>
