@@ -6,13 +6,13 @@ const GroupComponent = (props) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const toggleModal = () => setModal(!modal);
-  const DisplayMember = props.memberName.map( (name) => {
+  const DisplayMember = props.group.group_user.map( (name) => {
     return <p style={{marginLeft:'10px'}}>{name}</p>
   })
 
   return (
     <div>
-        <h5>{props.groupname} ({props.numOfMember})  
+        <h5>{props.group.group_name} ({props.group.group_user.length})  
         <Button outline color="danger" onClick={toggleModal} size="sm" style={{fontSize:'14px'}}>Leave</Button>
         </h5>
       <Button color="info" onClick={toggle} size="sm"  style={{fontSize:'12px'}}>See Member</Button>
