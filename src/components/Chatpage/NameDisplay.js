@@ -27,6 +27,10 @@ const NameDisplay = () => {
         "group_id": 10
     })
 
+    const [userName,setUserName] = useState(String(localStorage.getItem('username')))
+
+    const [groups, setGroups] = useState([])
+
     const handleOnChange1 = event => {
         const { name, value } = event.target;
         setDataJoin({ ...dataJoin, [name]: value });
@@ -70,9 +74,34 @@ const NameDisplay = () => {
         })
     }
 
-    const fetchGroup = () =>{
-        //for fetch data group BKK must add axios here
-    }
+    useEffect(
+        () => {
+            axios.get(`http://127.0.0.1:8000/api/group/?user_name=${userName}`)
+            .then ( (res) => {
+                console.log('Get success')
+                setGroups(res.data)
+                console.log('Data is already set')
+                console.log(res.data)
+            })
+            .catch ( (err) => {
+                console.log('ERROR FROM useEffect!!!')
+                console.log(err.message)
+                console.log(userName)
+            })
+        },[{groups}]
+    );
+
+    const groupsList = groups.map( (group) => {
+        console.log('group is ready')
+        return (
+            <GroupComponent 
+                key={group.group_id} 
+                groupname={group.group_name} 
+                numOfMember={group.group_user.length} 
+                memberName={group.group_user}
+            />
+        )
+    })
 
     
     return (
@@ -87,8 +116,7 @@ const NameDisplay = () => {
             </div>
             <div id='divGroupComponent'>
 
-                {/* area for push data that mapped to here */}
-                
+                {groupsList}                
 
             </div>
 

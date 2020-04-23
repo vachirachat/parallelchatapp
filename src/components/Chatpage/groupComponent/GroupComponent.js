@@ -6,13 +6,9 @@ const GroupComponent = (props) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const toggleModal = () => setModal(!modal);
-  const DisplayMember = (props) => {
-    return (
-      
-    <p style={{marginLeft:'10px'}}>{props.name}</p>
-      
-    )
-  }
+  const DisplayMember = props.memberName.map( (name) => {
+    return <p style={{marginLeft:'10px'}}>{name}</p>
+  })
 
   return (
     <div>
@@ -23,7 +19,7 @@ const GroupComponent = (props) => {
       {/*onClick should set new data for chat fetch in localStorage and in ChatDisplay should re-render in chat display*/}
       <Button color="success" size="sm"  style={{fontSize:'12px'}}>Chat</Button>
       <Collapse isOpen={isOpen}>
-          <DisplayMember name='name'/>
+          {DisplayMember}
         
       </Collapse>
       <Modal isOpen={modal} toggle={toggleModal}>
