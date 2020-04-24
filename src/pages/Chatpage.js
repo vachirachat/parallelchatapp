@@ -29,17 +29,39 @@ import "../App.css";
 class Chatpage extends Component {
   constructor(props) {
     super(props);
-    this.state = { chatSocket: "" };
+    this.state = { chatGroupId: 0, chatSocket: "" };
   }
 
   componentDidMount() {
-    const group_id = "1";
-    const user_name = "user1";
     const chatSocket = new WebSocket(
-      "ws://127.0.0.1:8000/ws/chat/user_name=" + user_name + "&group_id=" + group_id + "/"
+      "ws://127.0.0.1:8000/ws/chat/user_name=" +
+        localStorage.getItem("username") +
+        "&group_id=" +
+        localStorage.getItem("chatGroupId") +
+        "/"
     );
     this.setState({ chatSocket: chatSocket });
   }
+
+  // componentDidMount() {
+  //   window.addEventListener("storage", (e) => {
+  //     this.setState({ auth: true });
+  //   });
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.chatGroupId != this.state.chatGroupId) {
+  //     this.setState({ chatGroupId: localStorage.getItem("chatGroupId") });
+  //     const chatSocket = new WebSocket(
+  //       "ws://127.0.0.1:8000/ws/chat/user_name=" +
+  //         localStorage.getItem("username") +
+  //         "&group_id=" +
+  //         this.state.chatGroupId +
+  //         "/"
+  //     );
+  //     this.setState({ chatSocket: chatSocket });
+  //   }
+  // }
 
   componentWillMount() {
     if (this.state.chatSocket)
@@ -50,22 +72,20 @@ class Chatpage extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.chatSocket ? (
-          <div id="body" style={{ overflow: "hidden" }}>
-            <Row>
-              <Col sm={2} xs={12}>
-                <NameDisplay />
-              </Col>
-              <Col style={{ marginRight: "20px", height: "100vh" }}>
-                <DisplayChat chatSocket={this.state.chatSocket} />
-                <InputBox chatSocket={this.state.chatSocket} />
-              </Col>
-            </Row>
-          </div>
-        ) : (
-          ""
-        )}
+      <div id="body" style={{ overflow: "hidden" }}>
+        <Row>
+          <Col sm={2} xs={12}>
+            <NameDisplay />
+          </Col>
+          {this.state.chatSocket ? (
+            <Col style={{ marginRight: "20px", height: "100vh" }}>
+              <DisplayChat chatSocket={this.state.chatSocket} />
+              <InputBox chatSocket={this.state.chatSocket} />
+            </Col>
+          ) : (
+            ""
+          )}
+        </Row>
       </div>
     );
   }
