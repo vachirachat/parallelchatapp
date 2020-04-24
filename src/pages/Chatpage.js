@@ -4,6 +4,7 @@ import NameDisplay from "../components/Chatpage/NameDisplay";
 import DisplayChat from "../components/Chatpage/DisplayChat";
 import { Row, Col } from "reactstrap";
 import "../App.css";
+
 const Chatpage = () => {
   const group_id = "1";
   const user_name = "user1";

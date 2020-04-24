@@ -8,23 +8,16 @@ class DisplayChat extends Component {
     super(props);
     this.state = { chats: [] };
   }
-  componentDidMount() {
-    this.props.chatSocket.onopen = () => {};
-    this.props.chatSocket.onmessage = (m) => {
-      var tmp = this.state.chats;
-      tmp.push(JSON.parse(m.data));
-      this.setState({ chats: tmp });
-    };
-    console.log("componentDidMount");
-  }
 
   componentWillMount() {
+    this.props.chatSocket.onopen = () => {
+      console.log("WebSocket Client Connected");
+    };
     this.props.chatSocket.onmessage = (m) => {
       var tmp = this.state.chats;
       tmp.push(JSON.parse(m.data));
       this.setState({ chats: tmp });
     };
-    console.log("componentWillMount");
   }
 
   render() {
