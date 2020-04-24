@@ -1,36 +1,45 @@
-import React from 'react';
-import {Card} from 'reactstrap';
-import ChatArea from './chatComponent/ChatArea';
-import './DisplayChat.css';
-const DisplayChat = () => {
+import React, { Component } from "react";
+import { Card } from "reactstrap";
+import ChatArea from "./chatComponent/ChatArea";
+import "./DisplayChat.css";
+
+class DisplayChat extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { chats: [] };
+  }
+  componentDidMount() {
+    this.props.chatSocket.onopen = () => {};
+    this.props.chatSocket.onmessage = (m) => {
+      var tmp = this.state.chats;
+      tmp.push(JSON.parse(m.data));
+      this.setState({ chats: tmp });
+    };
+    console.log("componentDidMount");
+  }
+
+  componentWillMount() {
+    this.props.chatSocket.onmessage = (m) => {
+      var tmp = this.state.chats;
+      tmp.push(JSON.parse(m.data));
+      this.setState({ chats: tmp });
+    };
+    console.log("componentWillMount");
+  }
+
+  render() {
     return (
-        <div id='divOut'>
-            <Card  id='card'>
-                <div style={{width:'80wh'}}>
-                {/*fetch Data with user */}
-                
-                <ChatArea ownerChat={true} />
-                <ChatArea/>
-                <ChatArea ownerChat={true}/>
-                <ChatArea/>
-                <ChatArea ownerChat={true}/>
-                <ChatArea/>
-                <ChatArea ownerChat={true}/>
-                <ChatArea/>
-                <ChatArea ownerChat={true}/>
-                <ChatArea/>
-                <ChatArea ownerChat={true}/>
-                <ChatArea/>
-                <ChatArea ownerChat={true}/>
-                <ChatArea/>
-                <h1 style={{textAlign:'center'}}>----------------------unread message----------------------</h1>
-                {/*fetch unread message */}
-                <ChatArea ownerChat={true}/>
-                <ChatArea/>
-                </div>
-            </Card>
-        </div>
+      <div id="divOut">
+        <Card id="card">
+          <div style={{ width: "80wh" }}>
+            {this.state.chats.map((m) => {
+              if (m.type == "chat_message") return <ChatArea msg={m} />;
+            })}
+          </div>
+        </Card>
+      </div>
     );
-};
+  }
+}
 
 export default DisplayChat;
