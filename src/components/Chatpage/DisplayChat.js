@@ -10,9 +10,6 @@ class DisplayChat extends Component {
   }
 
   componentWillMount() {
-    this.props.chatSocket.onopen = () => {
-      console.log("WebSocket Client Connected");
-    };
     this.props.chatSocket.onmessage = (m) => {
       var tmp = this.state.chats;
       tmp.push(JSON.parse(m.data));
