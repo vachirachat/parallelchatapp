@@ -21,8 +21,8 @@ const GroupComponent = (props) => {
   });
 
   // ------ edit code here -------
-  const setChatGroupId = () => {
-    localStorage.setItem("chatGroupId", props.group.group_id);
+  const changeChatGroupId = () => {
+    props.parentCallback(props.group.group_id);
   };
 
   return (
@@ -37,7 +37,7 @@ const GroupComponent = (props) => {
         See Member
       </Button>
       {/*onClick should set new data for chat fetch in localStorage and in ChatDisplay should re-render in chat display*/}
-      <Button color="success" size="sm" style={{ fontSize: "12px" }} onClick={setChatGroupId}>
+      <Button color="success" size="sm" style={{ fontSize: "12px" }} onClick={changeChatGroupId}>
         Chat
       </Button>
       <Collapse isOpen={isOpen}>{DisplayMember}</Collapse>

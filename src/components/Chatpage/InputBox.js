@@ -42,7 +42,12 @@ class InputBox extends Component {
         <Row>
           <Col sm={10}>
             <FormGroup>
-              <Input type="text" name="msg_text" onChange={this.handleChange} />
+              <Input
+                type="text"
+                name="msg_text"
+                value={this.state.postData.msg_text}
+                onChange={this.handleChange}
+              />
             </FormGroup>
           </Col>
           <Col>

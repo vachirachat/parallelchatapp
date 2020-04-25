@@ -17,6 +17,17 @@ class DisplayChat extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.chatSocket != this.props.chatSocket) {
+      this.setState({ chats: [] });
+      this.props.chatSocket.onmessage = (m) => {
+        var tmp = this.state.chats;
+        tmp.push(JSON.parse(m.data));
+        this.setState({ chats: tmp });
+      };
+    }
+  }
+
   render() {
     return (
       <div id="divOut">
