@@ -27,7 +27,6 @@ class DisplayChat extends Component {
         this.setState({ chats: tmp });
         this.setState({ recent_msg_id: tmp[0].recent_msg_id });
       };
-      console.log(this.state);
     }
   }
 
