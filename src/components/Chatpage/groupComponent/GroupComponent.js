@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Collapse,
   Button,
@@ -10,6 +10,7 @@ import {
   ModalFooter,
   Input,
 } from "reactstrap";
+import axios from 'axios';
 
 const GroupComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,19 +21,40 @@ const GroupComponent = (props) => {
     return <p style={{ marginLeft: "10px" }}>{name}</p>;
   });
 
+  const [dataLeave, setDataLeave] = useState({
+    user_name: String(localStorage.getItem("username")),
+    group_id: props.group.group_id
+  });
+
   // ------ edit code here -------
   const changeChatGroupId = () => {
     props.parentCallback(props.group.group_id);
   };
 
+  const leaveGroup = () => {
+    axios
+      .post("http://127.0.0.1:8000/api/leave/",dataLeave)
+      .then((res) => {
+        console.log('leave group success')
+        alert('Left Group Success')
+        toggleModal()
+      })
+      .catch((err) => {
+        console.log('leave group fail')
+        console.log(dataLeave)
+        console.log(err)
+      })
+  }
+
   return (
-    <div>
-      <h5>
+    <div style={{margin: '25px 0px'}}>
+      <h5 style={{marginBottom: 0}}>
         {props.group.group_name} ({props.group.group_user.length})
         <Button outline color="danger" onClick={toggleModal} size="sm" style={{ fontSize: "14px" }}>
           Leave
         </Button>
       </h5>
+      <p style={{marginBottom : 0}}>Group ID: {props.group.group_id}</p>
       <Button color="info" onClick={toggle} size="sm" style={{ fontSize: "12px" }}>
         See Member
       </Button>
@@ -42,13 +64,18 @@ const GroupComponent = (props) => {
       </Button>
       <Collapse isOpen={isOpen}>{DisplayMember}</Collapse>
       <Modal isOpen={modal} toggle={toggleModal}>
-        <ModalHeader toggle={toggleModal}>Enter Username</ModalHeader>
-        <ModalBody>
-          <Input />
-        </ModalBody>
+        <ModalHeader toggle={toggleModal}>Are you sure to leave group</ModalHeader>
+        {/* <ModalBody>
+          <Button color="success" onClick={leaveGroup}>
+            Confirm
+          </Button>
+          <Button color="secondary" onClick={toggleModal}>
+            Cancel
+          </Button>
+        </ModalBody> */}
         <ModalFooter>
-          <Button color="success" onClick={toggleModal}>
-            Add member
+          <Button color="success" onClick={leaveGroup}>
+            Confirm
           </Button>
           <Button color="secondary" onClick={toggleModal}>
             Cancel
