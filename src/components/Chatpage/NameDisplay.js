@@ -57,6 +57,7 @@ const NameDisplay = (props) => {
         console.log(res.data.status);
         alert(data["groupname"]);
         alert("Success to create group");
+        toggleModal()
       })
       .catch((err) => {
         console.log("this is data");
@@ -72,6 +73,7 @@ const NameDisplay = (props) => {
       .post("http://127.0.0.1:8000/api/join/", dataJoin)
       .then((res) => {
         alert("Success to join group");
+        toggleModaljoin()
       })
       .catch((err) => {
         console.log(dataJoin);
