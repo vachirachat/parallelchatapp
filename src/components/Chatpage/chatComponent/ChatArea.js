@@ -21,7 +21,8 @@ const ChatArea = (props) => {
             {/*float is prop not css */}
             <BubbleChat float="right" msg={props.msg} />
           </Col>
-          <h1>Pic</h1>
+          <img src="https://cdn1.iconfinder.com/data/icons/ui-next-2020-shopping-and-e-commerce-1/12/75_user-circle-512.png" alt="PIC" style={{ height:'50px' }} />
+          {/* <h1>Pic</h1> */}
         </Row>
       </div>
     );
@@ -29,7 +30,8 @@ const ChatArea = (props) => {
   return (
     <div id="divBodyLeft">
       <Row>
-        <h1>Pic</h1>
+        <img src="https://cdn1.iconfinder.com/data/icons/ui-next-2020-shopping-and-e-commerce-1/12/75_user-circle-512.png" alt="PIC" style={{ height: '50px' }} />
+        {/* <h1>Pic</h1> */}
         <Col>
           <BubbleChat float="left" msg={props.msg} />
         </Col>
