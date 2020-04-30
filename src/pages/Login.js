@@ -11,7 +11,6 @@ const Login = () => {
       return alert("Please enter username");
     } else {
       console.log(data);
-      alert(data);
       axios
         .post("http://127.0.0.1:8000/api/login/", data)
         .then((res) => {
