@@ -122,7 +122,7 @@ const NameDisplay = (props) => {
           Create
         </Button>
         <Button color="info" id="buttonLogout" onClick={toggleModaljoin}>
-          Join group
+          Join
         </Button>
         <Button color="danger" id="buttonLogout" onClick={logoutButton}>
           Logout
