@@ -48,6 +48,7 @@ const NameDisplay = (props) => {
   const logoutButton = () => {
     props.parentCallback2();
     localStorage.clear();
+    if (props.chatSocket) props.chatSocket.close();
     history.push("/");
   };
   const addGroup = () => {
