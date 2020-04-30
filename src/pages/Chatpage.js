@@ -46,8 +46,8 @@ class Chatpage extends Component {
     this.setState({ chatSocket: chatSocket });
   };
 
-  callbackFunction2 = async () => {
-    this.state.chatSocket.close();
+  callbackFunction2 = () => {
+    if (this.state.chatSocket) this.state.chatSocket.close();
   }
 
   render() {
