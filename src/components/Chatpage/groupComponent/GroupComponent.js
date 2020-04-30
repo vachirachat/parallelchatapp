@@ -37,8 +37,8 @@ const GroupComponent = (props) => {
       .post("http://127.0.0.1:8000/api/leave/",dataLeave)
       .then((res) => {
         console.log('leave group success')
-        alert('Left Group Success')
         toggleModal()
+        props.countUp()
       })
       .catch((err) => {
         console.log('leave group fail')

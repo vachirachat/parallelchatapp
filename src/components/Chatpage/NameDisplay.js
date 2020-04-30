@@ -30,8 +30,11 @@ const NameDisplay = (props) => {
     group_name: "dasdasd",
   });
 
-  const toggleModalSuccess = () => setModalSuccess(!modalSuccess);
-  const [modalSuccess, setModalSuccess] = useState(false);
+  const toggleModalCreateSuccess = () => setModalCreateSuccess(!modalCreateSuccess);
+  const [modalCreateSuccess, setModalCreateSuccess] = useState(false);
+
+  const toggleModalJoinSuccess = () => setModalJoinSuccess(!modalJoinSuccess);
+  const [modalJoinSuccess, setModalJoinSuccess] = useState(false);
 
   const [dataJoin, setDataJoin] = useState({
     user_name: String(localStorage.getItem("username")),
@@ -39,6 +42,8 @@ const NameDisplay = (props) => {
   });
 
   const [userName, setUserName] = useState(String(localStorage.getItem("username")));
+
+  const [count, setCount] = useState(0);
 
   const handleOnChange1 = (event) => {
     const { name, value } = event.target;
@@ -59,9 +64,9 @@ const NameDisplay = (props) => {
     axios
       .post("http://127.0.0.1:8000/api/group/", data)
       .then((res) => {
+        countUp();
         console.log(res.data.status);
-        // alert("Success to create group");
-        toggleModalSuccess();
+        toggleModalCreateSuccess();
         toggleModal();
       })
       .catch((err) => {
@@ -77,8 +82,9 @@ const NameDisplay = (props) => {
     axios
       .post("http://127.0.0.1:8000/api/join/", dataJoin)
       .then((res) => {
-        alert("Success to join group");
+        toggleModalJoinSuccess();
         toggleModaljoin();
+        countUp();
       })
       .catch((err) => {
         console.log(dataJoin);
@@ -93,6 +99,7 @@ const NameDisplay = (props) => {
       .then((res) => {
         console.log("Get success");
         setGroupmember(res.data);
+        setCount({count} + 1);
         console.log("Data is already set");
         console.log(res.data);
       })
@@ -101,7 +108,11 @@ const NameDisplay = (props) => {
         console.log(err.message);
         console.log(userName);
       });
-  }, []);
+  }, [count]);
+
+  const countUp = () => {
+    setCount(count + 1);
+  }
 
   const groupsList = groupmember.map((group) => {
     console.log("group is ready");
@@ -110,9 +121,7 @@ const NameDisplay = (props) => {
         key={group.group_id}
         group={group}
         parentCallback={props.parentCallback}
-        /* groupname={group.group_name} 
-                numOfMember={group.group_user.length} 
-                memberName={group.group_user} */
+        countUp={countUp}
       />
     );
   });
@@ -164,14 +173,24 @@ const NameDisplay = (props) => {
         </ModalFooter>
       </Modal>
 
-      <Modal isOpen={modalSuccess} toggle={toggleModalSuccess} >
-        <ModalHeader toggle={toggleModalSuccess}>Create Group Success!</ModalHeader>
+      <Modal isOpen={modalCreateSuccess} toggle={toggleModalCreateSuccess} >
+        <ModalHeader toggle={toggleModalCreateSuccess}>Create Group Success!</ModalHeader>
         <ModalFooter>
-          <Button color="success" onClick={toggleModalSuccess} >
+          <Button color="success" onClick={toggleModalCreateSuccess} >
             Continue
           </Button>
         </ModalFooter>
       </Modal>
+
+      <Modal isOpen={modalJoinSuccess} toggle={toggleModalJoinSuccess} >
+        <ModalHeader toggle={toggleModalJoinSuccess}>Join Group Success!</ModalHeader>
+        <ModalFooter>
+          <Button color="success" onClick={toggleModalJoinSuccess} >
+            Continue
+          </Button>
+        </ModalFooter>
+      </Modal>
+
     </div>
   );
 };
