@@ -11,6 +11,7 @@ import {
   Input,
 } from "reactstrap";
 import axios from 'axios';
+import './GroupComponent.css';
 
 const GroupComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const GroupComponent = (props) => {
   const toggle = () => setIsOpen(!isOpen);
   const toggleModal = () => setModal(!modal);
   const DisplayMember = props.group.group_user.map((name) => {
-    return <p style={{ marginLeft: "10px" }}>{name}</p>;
+    return <p style={{ marginLeft: "10px", marginBottom: 0 }}>{name}</p>;
   });
 
   const [dataLeave, setDataLeave] = useState({
@@ -54,12 +55,12 @@ const GroupComponent = (props) => {
           Leave
         </Button>
       </h5>
-      <p style={{marginBottom : 0}}>Group ID: {props.group.group_id}</p>
-      <Button color="info" onClick={toggle} size="sm" style={{ fontSize: "12px" }}>
-        See Member
+      <p style={{marginBottom : 0, fontSize: "12px"}}>Group ID: {props.group.group_id}</p>
+      <Button id="btn-detail" color="info" onClick={toggle} size="sm" >
+        Member
       </Button>
       {/*onClick should set new data for chat fetch in localStorage and in ChatDisplay should re-render in chat display*/}
-      <Button color="success" size="sm" style={{ fontSize: "12px" }} onClick={changeChatGroupId}>
+      <Button  id="btn-detail" color="success" size="sm" onClick={changeChatGroupId}>
         Chat
       </Button>
       <Collapse isOpen={isOpen}>{DisplayMember}</Collapse>
