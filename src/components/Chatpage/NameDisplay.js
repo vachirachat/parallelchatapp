@@ -30,6 +30,9 @@ const NameDisplay = (props) => {
     group_name: "dasdasd",
   });
 
+  const toggleModalSuccess = () => setModalSuccess(!modalSuccess);
+  const [modalSuccess, setModalSuccess] = useState(false);
+
   const [dataJoin, setDataJoin] = useState({
     user_name: String(localStorage.getItem("username")),
     group_id: 10,
@@ -57,9 +60,9 @@ const NameDisplay = (props) => {
       .post("http://127.0.0.1:8000/api/group/", data)
       .then((res) => {
         console.log(res.data.status);
-        alert(data["groupname"]);
-        alert("Success to create group");
-        toggleModal()
+        // alert("Success to create group");
+        toggleModalSuccess();
+        toggleModal();
       })
       .catch((err) => {
         console.log("this is data");
@@ -75,7 +78,7 @@ const NameDisplay = (props) => {
       .post("http://127.0.0.1:8000/api/join/", dataJoin)
       .then((res) => {
         alert("Success to join group");
-        toggleModaljoin()
+        toggleModaljoin();
       })
       .catch((err) => {
         console.log(dataJoin);
@@ -157,6 +160,15 @@ const NameDisplay = (props) => {
           </Button>
           <Button color="secondary" onClick={toggleModal}>
             Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      <Modal isOpen={modalSuccess} toggle={toggleModalSuccess} >
+        <ModalHeader toggle={toggleModalSuccess}>Create Group Success!</ModalHeader>
+        <ModalFooter>
+          <Button color="success" onClick={toggleModalSuccess} >
+            Continue
           </Button>
         </ModalFooter>
       </Modal>
