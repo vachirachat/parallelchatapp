@@ -27,11 +27,11 @@ const ChatArea = (props) => {
       </div>
     );
   }
+
   return (
     <div id="divBodyLeft">
       <Row>
         <img src="https://cdn1.iconfinder.com/data/icons/ui-next-2020-shopping-and-e-commerce-1/12/75_user-circle-512.png" alt="PIC" style={{ height: '50px' }} />
-        {/* <h1>Pic</h1> */}
         <Col>
           <BubbleChat float="left" msg={props.msg} />
         </Col>

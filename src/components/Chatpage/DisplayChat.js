@@ -16,8 +16,7 @@ class DisplayChat extends Component {
       this.setState({ chats: tmp });
       this.setState({ recent_msg_id: tmp[0].recent_msg_id });
       this.setState({ last_msg_id: tmp[0].last_msg_id });
-      console.log('tmp[0]');
-      console.log(tmp[0]);
+      this.scrollToBottom();
       console.log('recent message id:');
       console.log(this.state.recent_msg_id);
       console.log('last message id:')
@@ -34,10 +33,15 @@ class DisplayChat extends Component {
         this.setState({ chats: tmp });
         this.setState({ recent_msg_id: tmp[0].recent_msg_id });
         this.setState({ last_msg_id:tmp[0].last_msg_id });
+        this.scrollToBottom();
       };
     }
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+  
   render() {
     return (
       <div id="divOut">
@@ -63,6 +67,9 @@ class DisplayChat extends Component {
                 } else return <ChatArea msg={m} />;
               }
             })}
+            <div style={{ float:"left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
+            </div>
           </div>
         </Card>
       </div>

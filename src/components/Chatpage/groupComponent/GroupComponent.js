@@ -66,14 +66,6 @@ const GroupComponent = (props) => {
       <Collapse isOpen={isOpen}>{DisplayMember}</Collapse>
       <Modal isOpen={modal} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Are you sure to leave group</ModalHeader>
-        {/* <ModalBody>
-          <Button color="success" onClick={leaveGroup}>
-            Confirm
-          </Button>
-          <Button color="secondary" onClick={toggleModal}>
-            Cancel
-          </Button>
-        </ModalBody> */}
         <ModalFooter>
           <Button color="danger" onClick={leaveGroup}>
             Confirm

@@ -8,10 +8,10 @@
     margin: 2px;
 }
 #divGroupComponent{
-    height: 100vh;
+    /* height: 100vh; */
     width: 100%;
     display: block;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-bottom: 50px;
+    /* padding-bottom: 50px; */
 }
