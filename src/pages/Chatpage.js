@@ -49,7 +49,10 @@ class Chatpage extends Component {
       <div id="body" style={{ overflow: "hidden" }}>
         <Row>
           <Col sm={2} xs={12}>
-            <NameDisplay parentCallback={this.callbackFunction} />
+            <NameDisplay
+              chatSocket={this.state.chatSocket}
+              parentCallback={this.callbackFunction}
+            />
           </Col>
           {this.state.chatSocket ? (
             <Col style={{ marginRight: "20px", height: "100vh" }}>

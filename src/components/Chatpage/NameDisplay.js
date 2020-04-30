@@ -47,6 +47,7 @@ const NameDisplay = (props) => {
   };
   const logoutButton = () => {
     localStorage.clear();
+    if (props.chatSocket) props.chatSocket.close();
     history.push("/");
   };
   const addGroup = () => {
@@ -57,7 +58,7 @@ const NameDisplay = (props) => {
         console.log(res.data.status);
         alert(data["groupname"]);
         alert("Success to create group");
-        toggleModal()
+        toggleModal();
       })
       .catch((err) => {
         console.log("this is data");
@@ -73,7 +74,7 @@ const NameDisplay = (props) => {
       .post("http://127.0.0.1:8000/api/join/", dataJoin)
       .then((res) => {
         alert("Success to join group");
-        toggleModaljoin()
+        toggleModaljoin();
       })
       .catch((err) => {
         console.log(dataJoin);
