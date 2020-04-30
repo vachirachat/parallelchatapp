@@ -29,7 +29,9 @@ import "../App.css";
 class Chatpage extends Component {
   constructor(props) {
     super(props);
-    this.state = { chatSocket: "" };
+    this.state = { 
+      chatSocket: "",
+    };
   }
 
   callbackFunction = async (childData) => {
@@ -44,12 +46,16 @@ class Chatpage extends Component {
     this.setState({ chatSocket: chatSocket });
   };
 
+  callbackFunction2 = async () => {
+    this.state.chatSocket.close();
+  }
+
   render() {
     return (
       <div id="body" style={{ overflow: "hidden" }}>
         <Row>
           <Col sm={2} xs={12}>
-            <NameDisplay parentCallback={this.callbackFunction} />
+            <NameDisplay parentCallback={this.callbackFunction} parentCallback2={this.callbackFunction2} />
           </Col>
           {this.state.chatSocket ? (
             <Col style={{ marginRight: "20px", height: "100vh" }}>

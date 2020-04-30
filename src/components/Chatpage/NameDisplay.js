@@ -46,6 +46,7 @@ const NameDisplay = (props) => {
     setData({ ...data, [name]: value });
   };
   const logoutButton = () => {
+    props.parentCallback2();
     localStorage.clear();
     history.push("/");
   };
