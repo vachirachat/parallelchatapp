@@ -75,7 +75,7 @@ const GroupComponent = (props) => {
           </Button>
         </ModalBody> */}
         <ModalFooter>
-          <Button color="success" onClick={leaveGroup}>
+          <Button color="danger" onClick={leaveGroup}>
             Confirm
           </Button>
           <Button color="secondary" onClick={toggleModal}>
