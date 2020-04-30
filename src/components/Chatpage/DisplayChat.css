@@ -2,6 +2,8 @@
     height: 90vh;
     display: block;
     width: 100%;
+    margin-top: 25px;
+    margin-left: 15px;
 }
 #card{
     height: 90vh;
@@ -9,3 +11,9 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
