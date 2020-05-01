@@ -10,8 +10,9 @@ import {
   ModalFooter,
   Input,
 } from "reactstrap";
-import axios from 'axios';
-import './GroupComponent.css';
+import axios from "axios";
+import "./GroupComponent.css";
+import util from "../../../util.json";
 
 const GroupComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ const GroupComponent = (props) => {
 
   const [dataLeave, setDataLeave] = useState({
     user_name: String(localStorage.getItem("username")),
-    group_id: props.group.group_id
+    group_id: props.group.group_id,
   });
 
   // ------ edit code here -------
@@ -34,33 +35,33 @@ const GroupComponent = (props) => {
 
   const leaveGroup = () => {
     axios
-      .post("http://127.0.0.1:5000/api/leave/",dataLeave)
+      .post("http://" + util.url + "/api/leave/", dataLeave)
       .then((res) => {
-        console.log('leave group success')
-        toggleModal()
-        props.countUp()
+        console.log("leave group success");
+        toggleModal();
+        props.countUp();
       })
       .catch((err) => {
-        console.log('leave group fail')
-        console.log(dataLeave)
-        console.log(err)
-      })
-  }
+        console.log("leave group fail");
+        console.log(dataLeave);
+        console.log(err);
+      });
+  };
 
   return (
-    <div style={{margin: '25px 0px'}}>
-      <h5 style={{marginBottom: 0}}>
+    <div style={{ margin: "25px 0px" }}>
+      <h5 style={{ marginBottom: 0 }}>
         {props.group.group_name} ({props.group.group_user.length})
         <Button outline color="danger" onClick={toggleModal} size="sm" style={{ fontSize: "14px" }}>
           Leave
         </Button>
       </h5>
-      <p style={{marginBottom : 0, fontSize: "12px"}}>Group ID: {props.group.group_id}</p>
-      <Button id="btn-detail" color="info" onClick={toggle} size="sm" >
+      <p style={{ marginBottom: 0, fontSize: "12px" }}>Group ID: {props.group.group_id}</p>
+      <Button id="btn-detail" color="info" onClick={toggle} size="sm">
         Member
       </Button>
       {/*onClick should set new data for chat fetch in localStorage and in ChatDisplay should re-render in chat display*/}
-      <Button  id="btn-detail" color="success" size="sm" onClick={changeChatGroupId}>
+      <Button id="btn-detail" color="success" size="sm" onClick={changeChatGroupId}>
         Chat
       </Button>
       <Collapse isOpen={isOpen}>{DisplayMember}</Collapse>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Button, Form, FormGroup, Label, Input, FormText, Card, Col } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import util from "../util.json";
 
 const Login = () => {
   let history = useHistory();
@@ -12,7 +13,7 @@ const Login = () => {
     } else {
       console.log(data);
       axios
-        .post("http://127.0.0.1:5000/api/login/", data)
+        .post("http://" + util.url + "/api/login/", data)
         .then((res) => {
           console.log(res);
           localStorage.setItem("username", res.data.user_name);

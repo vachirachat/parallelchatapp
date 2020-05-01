@@ -16,6 +16,8 @@ import "./NameDisplay.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { fixControlledValue } from "antd/lib/input/Input";
+import util from "../../util.json";
+
 const NameDisplay = (props) => {
   //groupmember for add member that fetch from server
   const [groupmember, setGroupmember] = useState([]);
@@ -62,7 +64,7 @@ const NameDisplay = (props) => {
   const addGroup = () => {
     console.log(data);
     axios
-      .post("http://127.0.0.1:5000/api/group/", data)
+      .post("http://" + util.url + "/api/group/", data)
       .then((res) => {
         countUp();
         console.log(res.data.status);
@@ -80,7 +82,7 @@ const NameDisplay = (props) => {
 
   const joinGroup = () => {
     axios
-      .post("http://127.0.0.1:5000/api/join/", dataJoin)
+      .post("http://" + util.url + "/api/join/", dataJoin)
       .then((res) => {
         toggleModalJoinSuccess();
         toggleModaljoin();
@@ -95,11 +97,11 @@ const NameDisplay = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:5000/api/group/?user_name=${userName}`)
+      .get(`http://${util.url}/api/group/?user_name=${userName}`)
       .then((res) => {
         console.log("Get success");
         setGroupmember(res.data);
-        setCount({count} + 1);
+        setCount({ count } + 1);
         console.log("Data is already set");
         console.log(res.data);
       })
@@ -112,7 +114,7 @@ const NameDisplay = (props) => {
 
   const countUp = () => {
     setCount(count + 1);
-  }
+  };
 
   const groupsList = groupmember.map((group) => {
     console.log("group is ready");
@@ -173,24 +175,23 @@ const NameDisplay = (props) => {
         </ModalFooter>
       </Modal>
 
-      <Modal isOpen={modalCreateSuccess} toggle={toggleModalCreateSuccess} >
+      <Modal isOpen={modalCreateSuccess} toggle={toggleModalCreateSuccess}>
         <ModalHeader toggle={toggleModalCreateSuccess}>Create Group Success!</ModalHeader>
         <ModalFooter>
-          <Button color="success" onClick={toggleModalCreateSuccess} >
+          <Button color="success" onClick={toggleModalCreateSuccess}>
             Continue
           </Button>
         </ModalFooter>
       </Modal>
 
-      <Modal isOpen={modalJoinSuccess} toggle={toggleModalJoinSuccess} >
+      <Modal isOpen={modalJoinSuccess} toggle={toggleModalJoinSuccess}>
         <ModalHeader toggle={toggleModalJoinSuccess}>Join Group Success!</ModalHeader>
         <ModalFooter>
-          <Button color="success" onClick={toggleModalJoinSuccess} >
+          <Button color="success" onClick={toggleModalJoinSuccess}>
             Continue
           </Button>
         </ModalFooter>
       </Modal>
-
     </div>
   );
 };

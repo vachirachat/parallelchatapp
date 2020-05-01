@@ -4,6 +4,7 @@ import NameDisplay from "../components/Chatpage/NameDisplay";
 import DisplayChat from "../components/Chatpage/DisplayChat";
 import { Row, Col } from "reactstrap";
 import "../App.css";
+import util from "../util.json";
 
 // const Chatpage = () => {
 //   const group_id = "1";
@@ -29,7 +30,7 @@ import "../App.css";
 class Chatpage extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       chatSocket: "",
     };
   }
@@ -37,7 +38,9 @@ class Chatpage extends Component {
   callbackFunction = async (childData) => {
     if (this.state.chatSocket) this.state.chatSocket.close();
     const chatSocket = new WebSocket(
-      "ws://127.0.0.1:5000/ws/chat/user_name=" +
+      "ws://" +
+        util.url +
+        "/ws/chat/user_name=" +
         localStorage.getItem("username") +
         "&group_id=" +
         childData +
@@ -48,14 +51,18 @@ class Chatpage extends Component {
 
   callbackFunction2 = () => {
     if (this.state.chatSocket) this.state.chatSocket.close();
-  }
+  };
 
   render() {
+    console.log(util.url);
     return (
       <div id="body" style={{ overflow: "hidden" }}>
         <Row>
           <Col sm={2} xs={12}>
-            <NameDisplay parentCallback={this.callbackFunction} parentCallback2={this.callbackFunction2} />
+            <NameDisplay
+              parentCallback={this.callbackFunction}
+              parentCallback2={this.callbackFunction2}
+            />
           </Col>
           {this.state.chatSocket ? (
             <Col style={{ marginRight: "20px", height: "100vh" }}>
