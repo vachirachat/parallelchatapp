@@ -34,7 +34,7 @@ const GroupComponent = (props) => {
 
   const leaveGroup = () => {
     axios
-      .post("http://127.0.0.1:8000/api/leave/",dataLeave)
+      .post("http://127.0.0.1:5000/api/leave/",dataLeave)
       .then((res) => {
         console.log('leave group success')
         toggleModal()

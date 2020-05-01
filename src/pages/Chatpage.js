@@ -37,7 +37,7 @@ class Chatpage extends Component {
   callbackFunction = async (childData) => {
     if (this.state.chatSocket) this.state.chatSocket.close();
     const chatSocket = new WebSocket(
-      "ws://127.0.0.1:8000/ws/chat/user_name=" +
+      "ws://127.0.0.1:5000/ws/chat/user_name=" +
         localStorage.getItem("username") +
         "&group_id=" +
         childData +

@@ -62,7 +62,7 @@ const NameDisplay = (props) => {
   const addGroup = () => {
     console.log(data);
     axios
-      .post("http://127.0.0.1:8000/api/group/", data)
+      .post("http://127.0.0.1:5000/api/group/", data)
       .then((res) => {
         countUp();
         console.log(res.data.status);
@@ -80,7 +80,7 @@ const NameDisplay = (props) => {
 
   const joinGroup = () => {
     axios
-      .post("http://127.0.0.1:8000/api/join/", dataJoin)
+      .post("http://127.0.0.1:5000/api/join/", dataJoin)
       .then((res) => {
         toggleModalJoinSuccess();
         toggleModaljoin();
@@ -95,7 +95,7 @@ const NameDisplay = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/group/?user_name=${userName}`)
+      .get(`http://127.0.0.1:5000/api/group/?user_name=${userName}`)
       .then((res) => {
         console.log("Get success");
         setGroupmember(res.data);
